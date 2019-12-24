@@ -35,10 +35,5 @@ $middleware($app);
 $routes = require __DIR__ . '/../src/routes.php';
 $routes($app);
 
-$app->add(function ($request, $response, $next) use ($app) {
-    $response = $next($request, $response);
-    return $response;
-});
-
 // Run app
 $app->run();

@@ -48,11 +48,19 @@ return function (App $app) {
         return $capsule;
     };
 
+    // PHP Debug Bar
+    $container['debugBar'] = function(Container $c) {
+        $debugbar = new DebugBar($c, new StandardDebugBar());
+        return $debugbar;
+    };
+
     // Slim Blade View
     $container['view'] = function (Container $c) {
         return new Blade(
             $c['settings']['renderer']['blade_template_path'],
-            $c['settings']['renderer']['blade_cache_path']
+            $c['settings']['renderer']['blade_cache_path'],
+            null,
+            ["debugbarRenderer" => $c['debugBar']->getRenderer(),]
         );
     };
 
@@ -60,11 +68,4 @@ return function (App $app) {
     $container['phpErrorHandler'] = $container['errorHandler'] = function(Container $c) {
         return new WhoopsError();
     };
-
-    // PHP Debug Bar
-    $container['debugBar'] = function(Container $c) {
-        $debugbar = new DebugBar($c, new StandardDebugBar());
-        return $debugbar;
-    };
-
 };
