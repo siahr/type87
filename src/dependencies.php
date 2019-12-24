@@ -1,5 +1,6 @@
 <?php
 
+use Anddye\Session\Helper;
 use Classes\Lib\DebugBar;
 use DebugBar\StandardDebugBar;
 use Monolog\Handler\StreamHandler;
@@ -67,5 +68,10 @@ return function (App $app) {
     // Whoops
     $container['phpErrorHandler'] = $container['errorHandler'] = function(Container $c) {
         return new WhoopsError();
+    };
+
+    // Session
+    $container['session'] = function(Container $c) {
+        return new Helper();
     };
 };

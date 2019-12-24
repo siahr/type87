@@ -6,10 +6,9 @@ namespace Classes\Lib;
 use ArrayAccess;
 use Exception;
 use Slim\App;
-use Slim\Container;
 
-class AppCapture implements ArrayAccess {
-    /** @var AppCapture */
+class Container implements ArrayAccess {
+    /** @var Container */
     private static $instance;
 
     /** @var App  */
@@ -24,7 +23,7 @@ class AppCapture implements ArrayAccess {
     }
 
     public static function createInstance(App $app) {
-        self::$instance = new AppCapture($app);
+        self::$instance = new Container($app);
     }
 
     public static function get($offset) {

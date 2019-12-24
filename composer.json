@@ -13,6 +13,7 @@
     ],
     "require": {
         "php": ">=5.6",
+        "andrewdyer/slim3-session-middleware": "^0.1.0",
         "dopesong/slim-whoops": "^2.3",
         "illuminate/database": "^5.4",
         "kriswallsmith/assetic": "^1.4",

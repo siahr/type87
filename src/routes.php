@@ -1,6 +1,5 @@
 <?php
 
-use Classes\Lib\DebugBar;
 use Slim\App;
 use Slim\Http\Request;
 use Slim\Http\Response;
@@ -11,7 +10,9 @@ return function (App $app) {
         $container->get('logger')->info("Slim-Skeleton '/' route");
         if ($name = $request->getAttribute("name")) {
             m("Hello " . $name . "!");
+            session()->set("name", $name);
         }
+        m(session()->get("name"));
         return $this->view->render($response, 'index');
     });
 };
