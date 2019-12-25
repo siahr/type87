@@ -66,9 +66,11 @@ return function (App $app) {
     };
 
     // Whoops
-    $container['phpErrorHandler'] = $container['errorHandler'] = function(Container $c) {
-        return new WhoopsError();
-    };
+    if ($container->get('settings')['debug']) {
+        $container['phpErrorHandler'] = $container['errorHandler'] = function(Container $c) {
+            return new WhoopsError();
+        };
+    }
 
     // Session
     $container['session'] = function(Container $c) {

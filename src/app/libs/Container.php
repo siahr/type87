@@ -14,7 +14,7 @@ class Container implements ArrayAccess {
     /** @var App  */
     private $app;
 
-    /** @var Container */
+    /** @var \Slim\Container */
     private $container;
 
     private function __construct(App $app) {
@@ -26,7 +26,8 @@ class Container implements ArrayAccess {
         self::$instance = new Container($app);
     }
 
-    public static function get($offset) {
+    public static function get($offset=null) {
+        if ($offset === null) return self::$instance->container;
         return self::$instance->offsetGet($offset);
     }
 
