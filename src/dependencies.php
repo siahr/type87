@@ -2,6 +2,7 @@
 
 use Anddye\Session\Helper;
 use Classes\Lib\DebugBar;
+use Classes\Lib\Session;
 use DebugBar\StandardDebugBar;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
@@ -74,6 +75,6 @@ return function (App $app) {
 
     // Session
     $container['session'] = function(Container $c) {
-        return new Helper();
+        return new Session(new Helper());
     };
 };
