@@ -4,6 +4,8 @@
 namespace Classes\Lib;
 
 
+use DebugBar\DataCollector\PDO\PDOCollector;
+use DebugBar\DataCollector\PDO\TraceablePDO;
 use DebugBar\DebugBarException;
 use DebugBar\StandardDebugBar;
 use DebugBar\Bridge\MonologCollector;
@@ -19,6 +21,8 @@ class DebugBar {
         $this->debugbar = $debugbar;
         try {
             $this->debugbar->addCollector(new MonologCollector($container['logger']));
+            $pdo = new TraceablePDO($container['db']->getConnection()->getPdo());
+            $debugbar->addCollector(new PDOCollector($pdo));
         } catch(DebugBarException $e) {
 
         }
