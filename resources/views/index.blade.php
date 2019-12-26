@@ -24,23 +24,14 @@
             font-weight: 200;
             margin-bottom: 0;
         }
-        @php
-          echo $debugbarRenderer->dumpCssAssets();
-        @endphp
-
     </style>
-    <script type="text/javascript">
-        @php
-          echo $debugbarRenderer->dumpJsAssets()
-        @endphp
-    </script>
 </head>
 <body>
 <h1>Slim</h1>
 <div>a microframework for PHP</div>
 <p>Try <a href="http://www.slimframework.com">SlimFramework</a></p>
 @php
-  echo $debugbarRenderer->render();
+  debug_bar();
 @endphp
 </body>
 </html>

@@ -1,6 +1,7 @@
 <?php
 
 use Classes\Lib\Container;
+use Classes\Lib\DebugBar;
 
 if (!function_exists('m')) {
     function m($message) {
@@ -14,4 +15,9 @@ if (!function_exists('session')) {
     }
 }
 
+if (!function_exists('debug_bar')) {
+    function debug_bar() {
+        DebugBar::embedDebugBar();
+    }
+}
 
