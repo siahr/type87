@@ -3,7 +3,8 @@ Packaged framework based on Slim3.
 
 ## Included package
  * slim/slim 
- * illuminate/database (However, DB facade is not work ...)
+ * illuminate/database
+    * If you need to use DB facade, `use Illuminate\Database\Capsule\Manager as DB;` or `db()::select("...")`. 
  * rubellum/slim-blade-view
  * andrewdyer/slim3-session-middleware
  * laravel/helpers
