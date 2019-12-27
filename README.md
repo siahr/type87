@@ -18,4 +18,5 @@ Packaged framework based on Slim3.
  1. Clone this repository.
  2. Execute `composer update`
  3. Deploy on your Web server (already fixed slim3 sub-directory issue).
- 4. Enjoy!
+ 4. Copy `.env-example` to `.env` and modify to your environment.
+ 5. Enjoy!
