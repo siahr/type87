@@ -1,8 +1,8 @@
 # 八十七式躯体 (Type87 framework)
 Packaged framework based on Slim3.
 
-## Other Included package
-
+## Included package
+ * slim/slim 
  * illuminate/database (However, DB facade is not work ...)
  * rubellum/slim-blade-view
  * andrewdyer/slim3-session-middleware
