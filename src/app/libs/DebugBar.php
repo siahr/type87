@@ -10,6 +10,7 @@ use DebugBar\DebugBarException;
 use DebugBar\JavascriptRenderer;
 use DebugBar\StandardDebugBar;
 use DebugBar\Bridge\MonologCollector;
+use Exception;
 use Slim\Container;
 
 class DebugBar {
@@ -45,10 +46,17 @@ class DebugBar {
     public function __construct(Container $container, StandardDebugBar $debugbar) {
         $this->debugbar = $debugbar;
         $this->debugbar->addCollector(new MonologCollector($container['logger']));
-        $pdo = new TraceablePDO($container['db']->getConnection()->getPdo());
-        $pdoCollector = new PDOCollector($pdo);
-        $pdoCollector->setRenderSqlWithParams(true, "'");
-        $debugbar->addCollector($pdoCollector);
+        try {
+            $connection = $container['db']->getConnection()->getPdo();
+        } catch(Exception $e) {
+            $connection = null;
+        }
+        if ($connection) {
+            $pdo = new TraceablePDO($connection);
+            $pdoCollector = new PDOCollector($pdo);
+            $pdoCollector->setRenderSqlWithParams(true, "'");
+            $debugbar->addCollector($pdoCollector);
+        }
         self::$renderer = $this->debugbar->getJavascriptRenderer();
         self::$renderer->setIncludeVendors(false);
     }
