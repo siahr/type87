@@ -16,6 +16,6 @@ return function (App $app) {
         return $this->view->render($response, 'index');
     });
 
-    $app->get('/{controller}/[{action}]', Controller::class . ':dispatch');
+    $app->get('/{controller}/[{path:.*}]', Controller::class . ':dispatch');
 
 };

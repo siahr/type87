@@ -29,11 +29,22 @@ class Dispatcher {
     public function dispatch() {
         $controller = $this->request->getAttribute("controller");
         $action = $this->request->getAttribute("action");
+        if (!$action) {
+            $path = explode("/", $this->request->getAttribute("path"));
+            $action = array_shift($path);
+        }
         if (empty($action)) $action = "index";
         $className = "Classes\\Controller\\" . ucfirst(Str::camel($controller)) . "Controller";
         try {
             $reflMethod = new ReflectionMethod($className, Str::camel($action));
-            $reflMethod->invokeArgs(new $className(Container::get()), [$this->request, $this->response]);
+            $params = $reflMethod->getParameters();
+            $additionalParams = [];
+            $j = 0;
+            for($i = 2; $i < count($params); $i++) {
+                $additionalParams[] = isset($path[$j]) ? $path[$j] : null;
+            }
+            $args = array_merge([$this->request, $this->response], $additionalParams);
+            $reflMethod->invokeArgs(new $className(Container::get()), $args);
         } catch(ReflectionException $e) {
             throw new NotFoundException($this->request, $this->response);
         }
